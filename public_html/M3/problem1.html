@@ -5,21 +5,76 @@
     <title>Problem 1</title>
     <meta charset="utf-8" />
     <script>
+        
         window.addEventListener("load", () => {
             console.log("loaded via javascript");
             //TODO: add any extra onload processing you may need here
+            let tags = document.getElementsByTagName("a");
+            console.log("tag", tags);
+            for(let ele of tags){
+                console.log(ele);
+                ele.onclick = getCurrentSelection;
+            }
         });
-        function getCurrentSelection() {
+        function getCurrentSelection(event) {
             setTimeout(() => {
-                //added this delay here as some solutions may require it to update properly (i.e., click code may complete before the navigation changes)
+            	//added this delay here as some solutions may require it to update properly (i.e., click code may complete before the navigation changes)
                 //TODO: add code for processing the current selection 
-
+                console.log(event, event.srcElement.innerText);
+                updateCurrentPage(event.srcElement.innerText);
+                //var yourSelect = Window.getSelection( "your-select-id" );
+                //updateCurrentPage(var);
                 //Note: likely you'll want to call updateCurrentPage towards the end
             }, 100);
         }
     </script>
     <style>
         /* TODO: make edits here */
+        nav{
+            background-color: black;
+            border: 0;
+	        border-top: 5px solid #3b8c5a;
+            border-bottom: 5px solid #3b8c5a;
+            border-left: 5px solid #3b8c5a;
+            border-right: 5px solid #3b8c5a;
+        }
+        nav > ul li{
+            display: inline;
+        }
+        li a {
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        li a:hover {
+            background-color: #3b8c5a;
+        }
+        nav > ul li{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            
+        }
+        ul li{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        ul > li > ul li{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        ul > li > ul li:before {
+            content: '✓';
+        }
+        h1{
+            text-transform: capitalize;
+        }
+        a{
+            text-transform: capitalize;
+        }
     </style>
     <!-- make the necessary edits above this line -->
 
