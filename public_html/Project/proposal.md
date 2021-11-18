@@ -1,9 +1,9 @@
-# Project Name: (Which Project)
-## Project Summary: (Copy from proposal)
+# Project Name: Arcade
+## Project Summary: This project will create a simple Arcade with scoreboards and competitions based on the implemented game.
 ## Github Link: (Prod Branch of Project Folder)
-## Project Board Link: 
+## Project Board Link: https://github.com/i-am-kalrav/IT202-003/projects/1
 ## Website Link: (Heroku Prod of Project folder)
-## Your Name:
+## Your Name: Kalrav Srivastava
 
 <!--
 ### Line item / Feature template (use this for each bullet point)
