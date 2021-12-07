@@ -6,6 +6,8 @@ if (isset($_POST["submit"])) {
     $confirm = trim(se($_POST, "confirm", null, false));
     $username = trim(se($_POST, "username", null, false));
 
+    //$params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
+
     $isValid = true;
     if (!isset($email) || !isset($password) || !isset($confirm) || !isset($username)) {
         flash("Must provide email, username, password, and confirm password", "warning");
@@ -17,6 +19,10 @@ if (isset($_POST["submit"])) {
     }
     if (strlen($password) < 3) {
         flash("Password must be 3 or more characters", "warning");
+        $isValid = false;
+    }
+    if (strlen($username) < 2) {
+        flash("Username must be 2 or more characters", "warning");
         $isValid = false;
     }
     $email = sanitize_email($email);
@@ -37,7 +43,7 @@ if (isset($_POST["submit"])) {
         } catch (PDOException $e) {
             $code = se($e->errorInfo, 0, "00000", false);
             if ($code === "23000") {
-                flash("An account with this email already exists", "danger");
+                flash("An account with this email and/or username already exists", "danger");
             } else {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
@@ -50,11 +56,13 @@ if (isset($_POST["submit"])) {
     <form method="POST" onsubmit="return validate(this);">
         <div class="mb-3">
             <label class="form-label" for="email">Email: </label>
-            <input class="form-control" type="email" id="email" name="email" required />
+            <!--<input class="form-control" type="email" id="email" name="email" required />-->
+            <input class="form-control" type="email" id="email" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" required />
         </div>
         <div class="mb-3">
             <label class="form-label" for="username">Username: </label>
-            <input class="form-control" type="text" id="username" name="username" required />
+            <!--<input class="form-control" type="text" id="username" name="username" required />-->
+            <input class="form-control" type="text" id="username" name="username" value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>" required />
         </div>
         <div class="mb-3">
             <label class="form-label" for="pw">Password: </label>
