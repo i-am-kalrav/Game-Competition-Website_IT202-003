@@ -14,6 +14,7 @@ if (isset($_POST["save"])) {
     $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
     try {
         $stmt->execute($params);
+        flash("Username/email updated", "success");
     } catch (Exception $e) {
         if ($e->errorInfo[1] === 1062) {
             //https://www.php.net/manual/en/function.preg-match.php
@@ -22,11 +23,13 @@ if (isset($_POST["save"])) {
                 flash("The chosen " . $matches[1] . " is not available.", "warning");
             } else {
                 //TODO come up with a nice error message
-                echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                //echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                flash("An unexpected error occurred, please try again", "danger");
             }
         } else {
             //TODO come up with a nice error message
-            echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            //echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            flash("An unexpected error occurred, please try again", "danger");
         }
     }
     //select fresh data from table
@@ -51,33 +54,45 @@ if (isset($_POST["save"])) {
     $current_password = se($_POST, "currentPassword", null, false);
     $new_password = se($_POST, "newPassword", null, false);
     $confirm_password = se($_POST, "confirmPassword", null, false);
-    if (isset($current_password) && isset($new_password) && isset($confirm_password)) {
-        if ($new_password === $confirm_password) {
-            //TODO validate current
-            $stmt = $db->prepare("SELECT password from Users where id = :id");
-            try {
-                $stmt->execute([":id" => get_user_id()]);
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                if (isset($result["password"])) {
-                    if (password_verify($current_password, $result["password"])) {
-                        $query = "UPDATE Users set password = :password where id = :id";
-                        $stmt = $db->prepare($query);
-                        $stmt->execute([
-                            ":id" => get_user_id(),
-                            ":password" => password_hash($new_password, PASSWORD_BCRYPT)
-                        ]);
 
-                        flash("Password reset", "success");
-                    } else {
-                        flash("Current password is invalid", "warning");
+    if (strlen($current_password) > 2 && strlen($new_password) > 2 && strlen($confirm_password) > 2)
+    {
+        if (isset($current_password) && isset($new_password) && isset($confirm_password)) {
+            if ($new_password === $confirm_password) {
+                //TODO validate current
+                $stmt = $db->prepare("SELECT password from Users where id = :id");
+                try {
+                    $stmt->execute([":id" => get_user_id()]);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if (isset($result["password"])) {
+                        if (password_verify($current_password, $result["password"])) {
+                            $query = "UPDATE Users set password = :password where id = :id";
+                            $stmt = $db->prepare($query);
+                            $stmt->execute([
+                                ":id" => get_user_id(),
+                                ":password" => password_hash($new_password, PASSWORD_BCRYPT)
+                            ]);
+
+                            flash("Password reset", "success");
+                        } else {
+                            flash("Current password is invalid", "warning");
+                        }
                     }
+                } catch (Exception $e) {
+                    echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
                 }
-            } catch (Exception $e) {
-                echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            } else {
+                flash("New passwords don't match", "warning");
             }
-        } else {
-            flash("New passwords don't match", "warning");
         }
+        else
+        {
+            flash("Unable to reset password at the time. Please try again later.", "warning");
+        }
+    }
+    else
+    {
+        flash("No changes to password were saved.", "warning");
     }
 }
 ?>
@@ -118,6 +133,8 @@ if ($id > -1 /*&& $id !== get_user_id()*/) {
         <a href="?id=<?php se(get_user_id());   ?>" class="btn btn-primary">View Public Profile</a>
         <?php /* Viewing our profile */ ?>
         <form method="POST" onsubmit="return validate(this);">
+            <br>
+            <h5>Email/Username Update</h5>
             <div class="mb-3">
                 <label class="form-label" for="email">Email</label>
                 <input class="form-control" type="email" name="email" id="email" value="<?php se($email); ?>" />
@@ -127,7 +144,9 @@ if ($id > -1 /*&& $id !== get_user_id()*/) {
                 <input class="form-control" type="text" name="username" id="username" value="<?php se($username); ?>" />
             </div>
             <!-- DO NOT PRELOAD PASSWORD -->
-            <div>Password Reset</div>
+            <br>
+            <!--<div--><!--Password Reset</div>-->
+            <h5>Password Reset</h5>
             <div class="mb-3">
                 <label class="form-label" for="cp">Current Password</label>
                 <input class="form-control" type="password" name="currentPassword" id="cp" />
@@ -140,6 +159,7 @@ if ($id > -1 /*&& $id !== get_user_id()*/) {
                 <label class="form-label" for="conp">Confirm Password</label>
                 <input class="form-control" type="password" name="confirmPassword" id="conp" />
             </div>
+            <br>
             <input class="btn btn-primary" type="submit" value="Update Profile" name="save" />
         </form>
     <?php else : ?>
