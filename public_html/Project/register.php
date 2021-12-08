@@ -46,6 +46,7 @@ if (isset($_POST["submit"])) {
                 flash("An account with this email and/or username already exists", "danger");
             } else {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                flash("An unexpected error occurred, please try again", "danger");
             }
         }
     }

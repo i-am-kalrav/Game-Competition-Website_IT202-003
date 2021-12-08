@@ -46,7 +46,7 @@ if (isset($_POST["save"])) {
         }
     } catch (Exception $e) {
         flash("An unexpected error occurred, please try again", "danger");
-        //echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+        echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
     }
 
 
@@ -80,6 +80,7 @@ if (isset($_POST["save"])) {
                     }
                 } catch (Exception $e) {
                     echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                    flash("An unexpected error occurred, please try again", "danger");
                 }
             } else {
                 flash("New passwords don't match", "warning");
