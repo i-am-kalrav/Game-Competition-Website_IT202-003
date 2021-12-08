@@ -17,7 +17,7 @@ if (isset($_POST["save"])) {
         flash("Username/email updated", "success");
     } catch (Exception $e) {
         if ($e->errorInfo[1] === 1062) {
-            //https://www.php.net/manual/en/function.preg-match.php
+            //https://www.php.net/manual/en/function.preg-match.php                                     **User will be able to view their profile**
             preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
             if (isset($matches[1])) {
                 flash("The chosen " . $matches[1] . " is not available.", "warning");
