@@ -30,7 +30,7 @@ if (isset($_POST["submit"])) {
         flash("Invalid email", "warning");
         $isValid = false;
     }
-    //TODO add validation for username (length? disallow special chars? etc)
+    //TODO add validation for username (length? disallow special chars? etc)   <---- Length Done. Special Chars, not yet; don't see why its needed tbh...
     if ($isValid) {
         //do our registration
         $db = getDB();
