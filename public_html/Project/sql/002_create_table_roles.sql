@@ -1,4 +1,3 @@
-  
 CREATE TABLE IF NOT EXISTS  `Roles`
 (
     `id`         int auto_increment not null,
