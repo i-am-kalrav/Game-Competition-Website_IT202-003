@@ -33,9 +33,9 @@ function is_valid_email($email = "") {
 }
 //User Helpers
 function is_logged_in() {
-    return isset($_SESSION["user"]); //se($_SESSION, "user", false, false);
+    return isset($_SESSION["user"]); //se($_SESSION, "user", false, false);  <---------- Function to know if logged in or not
 }
-function has_role($role) {
+function has_role($role) {//                                                 <---------- Function to check for roles
     if (is_logged_in() && isset($_SESSION["user"]["roles"])) {
         foreach ($_SESSION["user"]["roles"] as $r) {
             if ($r["name"] === $role) {
