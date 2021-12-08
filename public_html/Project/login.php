@@ -58,7 +58,7 @@ if (isset($_POST["submit"])) {
                     calc_winners_or_expire();//This can cost up to ~100 queries
                     die(header("Location: home.php"));
                 } else {
-                    se("Passwords don't match");
+                    flash("Passwords don't match");
                 }
             } else {
                 flash("User doesn't exist");
