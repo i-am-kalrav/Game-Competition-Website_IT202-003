@@ -58,13 +58,15 @@ if (isset($_POST["submit"])) {
                     calc_winners_or_expire();//This can cost up to ~100 queries
                     die(header("Location: home.php"));
                 } else {
-                    flash("Passwords don't match");
+                    //flash("Passwords don't match");
+                    flash("Incorrect password");
                 }
             } else {
                 flash("User doesn't exist");
             }
         } catch (Exception $e) {
             echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            flash("An unexpected error occurred, please try again", "danger");
         }
     }
 }
