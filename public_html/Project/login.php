@@ -13,7 +13,7 @@ if (isset($_POST["submit"])) {
         flash("Password must be 3 or more characters", "warning");
         $isValid = false;
     }
-    //$email = sanitize_email($email);   <-------- Because login with both email and username
+    //$email = sanitize_email($email);  <-------- Because login with both email and username
     /*if (!is_valid_email($email)) {
         flash("Invalid email", "warning");
         $isValid = false;
