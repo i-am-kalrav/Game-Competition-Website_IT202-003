@@ -42,28 +42,15 @@ require_once(__DIR__ . "/../lib/functions.php");
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <?php if (is_logged_in()) : ?>
                 <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="shop.php">Shop</a></li>
-                <li class="nav-item"><a class="nav-link" href="quarry.php">Quarry</a></li>
-                <li class="nav-item"><a class="nav-link" href="account_history.php">Account History</a></li>
                 <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Competitions
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="create_competition.php">Create</a></li>
-                        <li><a class="dropdown-item" href="competitions.php">Active</a></li>
-                        <li><a class="dropdown-item" href="competitions.php?filter=joined">Joined History</a></li>
-                        <li><a class="dropdown-item" href="competitions.php?filter=expired">Expired</a></li>
-                    </ul>
-                </li>
             <?php endif; ?>
             <?php if (!is_logged_in()) : ?>
                 <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
             <?php endif; ?>
             <?php if (has_role("Admin")) : ?>
-                <li class="nav-item dropdown">
+                <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Admin
                     </a>
@@ -72,15 +59,12 @@ require_once(__DIR__ . "/../lib/functions.php");
                         <li><a class="dropdown-item" href="add_score.php">Add Score</a></li>
                         <li><a class="dropdown-item" href="view_user_accounts.php">View Accounts</a></li>
                     </ul>
-                </li>
+                </li>-->
             <?php endif; ?>
             <?php if (is_logged_in()) : ?>
                 <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
             <?php endif; ?>
         </ul>
-        <?php if (is_logged_in()) :    ?>
-            <?php include(__DIR__ . "/balance.php"); ?>
-        <?php endif;    ?>
     </div>
 </nav>
 <script>
