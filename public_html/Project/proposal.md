@@ -2,7 +2,7 @@
 ## Project Summary: This project will create a simple Arcade with scoreboards and competitions based on the implemented game.
 ## Github Link: (Prod Branch of Project Folder)
 ## Project Board Link: https://github.com/i-am-kalrav/IT202-003/projects/1
-## Website Link: (Heroku Prod of Project folder)
+## Website Link: https://ks874-prod.herokuapp.com/Project/login.php
 ## Your Name: Kalrav Srivastava
 
 <!--
@@ -23,87 +23,124 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-    - [ ] \(mm/dd/yyyy of completion) User will be able to register a new account
-      -  List of Evidence of Feature Completion
-        - Status: Pending (Completed, Partially working, Incomplete, Pending)
-        - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-        - Pull Requests
-        - PR link #1 (repeat as necessary)
-        - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-            - Screenshot #1 description explaining what you're trying to show
-    - [ ] \(mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
-      -  List of Evidence of Feature Completion
-        - Status: Pending (Completed, Partially working, Incomplete, Pending)
-        - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-        - Pull Requests
-        - PR link #1 (repeat as necessary)
-        - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-            - Screenshot #1 description explaining what you're trying to show
-    - [ ] \(mm/dd/yyyy of completion) User will be able to logout
-      -  List of Evidence of Feature Completion
-        - Status: Pending (Completed, Partially working, Incomplete, Pending)
-        - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-        - Pull Requests
-        - PR link #1 (repeat as necessary)
-        - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-            - Screenshot #1 description explaining what you're trying to show
-    - [ ] \(mm/dd/yyyy of completion) Basic security rules implemented
-      -  List of Evidence of Feature Completion
-        - Status: Pending (Completed, Partially working, Incomplete, Pending)
-        - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-        - Pull Requests
-        - PR link #1 (repeat as necessary)
-        - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-            - Screenshot #1 description explaining what you're trying to show
-    - [ ] \(mm/dd/yyyy of completion) Basic Roles implemented
-      -  List of Evidence of Feature Completion
-        - Status: Pending (Completed, Partially working, Incomplete, Pending)
-        - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-        - Pull Requests
-        - PR link #1 (repeat as necessary)
-        - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-            - Screenshot #1 description explaining what you're trying to show
-    - [ ] \(mm/dd/yyyy of completion) Site should have basic styles/theme applied; everything should be styled
-      -  List of Evidence of Feature Completion
-        - Status: Pending (Completed, Partially working, Incomplete, Pending)
-        - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-        - Pull Requests
-        - PR link #1 (repeat as necessary)
-        - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-            - Screenshot #1 description explaining what you're trying to show
-    - [ ] \(mm/dd/yyyy of completion) Any output messages/errors should be “user friendly”
-      -  List of Evidence of Feature Completion
-        - Status: Pending (Completed, Partially working, Incomplete, Pending)
-        - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-        - Pull Requests
-        - PR link #1 (repeat as necessary)
-        - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-            - Screenshot #1 description explaining what you're trying to show
-    - [ ] \(mm/dd/yyyy of completion) User will be able to see their profile
-      -  List of Evidence of Feature Completion
-        - Status: Pending (Completed, Partially working, Incomplete, Pending)
-        - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-        - Pull Requests
-        - PR link #1 (repeat as necessary)
-        - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-            - Screenshot #1 description explaining what you're trying to show
-    - [ ] \(mm/dd/yyyy of completion) User will be able to edit their profile
-      -  List of Evidence of Feature Completion
-        - Status: Pending (Completed, Partially working, Incomplete, Pending)
-        - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-        - Pull Requests
-        - PR link #1 (repeat as necessary)
-        - Screenshots
-        - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-            - Screenshot #1 description explaining what you're trying to show
+    - [x] \(12/07/2021) User will be able to register a new account
+      - Status: Completed
+      - Direct Link:
+        - https://ks874-prod.herokuapp.com/Project/register.php
+      - Pull Request:
+        - https://github.com/i-am-kalrav/IT202-003/pull/22
+      - Screenshots are viewable in the above Pull Request
+      * Form Fields
+        * Username, email, password, confirm password(other fields optional)
+        * Email is required and must be validated
+        * Username is required
+        * Confirm password’s match
+      * Users Table
+        * Id, username, email, password (60 characters), created, modified
+      * Password must be hashed (plain text passwords will lose points)
+      * Email should be unique
+      * Username should be unique
+      * System should let user know if username or email is taken and allow the user to correct the error without wiping/clearing the form
+        * The only fields that may be cleared are the password fields
+
+    - [x] \(12/07/2021) User will be able to login to their account (given they enter the correct credentials)
+      - Status: Completed
+      - Direct Link:
+        - https://ks874-prod.herokuapp.com/Project/login.php
+      - Pull Request:
+        - https://github.com/i-am-kalrav/IT202-003/pull/24
+      - Screenshots are viewable in the above Pull Request
+      * Form
+        * User can login with **email **or **username**
+          * This can be done as a single field or as two separate fields
+        * Password is required
+      * User should see friendly error messages when an account either doesn’t exist or if passwords don’t match
+      * Logging in should fetch the user’s details (and roles) and save them into the session.
+      * User will be directed to a landing page upon login
+        * This is a protected page (non-logged in users shouldn’t have access)
+        * This can be home, profile, a dashboard, etc
+    
+    - [x] \(12/07/2021) User will be able to logout
+      - Status: Completed
+      - Direct Link:
+        - https://ks874-prod.herokuapp.com/Project/logout.php
+      - Pull Request:
+        - https://github.com/i-am-kalrav/IT202-003/pull/25
+      - Screenshots are viewable in the above Pull Request
+      * Logging out will redirect to login page
+      * User should see a message that they’ve successfully logged out
+      * Session should be destroyed (so the back button doesn’t allow them access back in)
+
+    
+    - [x] \(12/07/2021) Basic security rules implemented
+      - Status: Completed
+      - Direct Link:
+        - https://ks874-prod.herokuapp.com/lib/functions.php
+      - Pull Request:
+        - https://github.com/i-am-kalrav/IT202-003/pull/26
+      - Screenshots are viewable in the above Pull Request
+      - * Authentication:
+        * Function to check if user is logged in
+        * Function should be called on appropriate pages that only allow logged in users
+      * Roles/Authorization:
+        * Have a roles table (see below)
+
+    
+    - [x] \(12/07/2021) Basic Roles implemented
+      - Status: Completed
+      - Direct Link:
+        - https://ks874-prod.herokuapp.com/Project/sql/002_create_table_roles.sql
+        - https://ks874-prod.herokuapp.com/Project/sql/003_create_table_userroles.sql
+      - Pull Request:
+        - https://github.com/i-am-kalrav/IT202-003/pull/27
+      - Screenshots are viewable in the above Pull Request
+      * Have a Roles table	(id, name, description, is_active, modified, created)
+      * Have a User Roles table (id, user_id, role_id, is_active, created, modified)
+      * Include a function to check if a user has a specific role (we won’t use it for this milestone but it should be usable in the future)
+
+    
+    - [x] \(12/07/2021) Site should have basic styles/theme applied; everything should be styled
+      - Status: Completed
+      - Direct Link:
+        - https://ks874-prod.herokuapp.com/partials/prism.php
+      - Pull Request:
+        - https://github.com/i-am-kalrav/IT202-003/pull/28
+      - Screenshots are viewable in the above Pull Request
+      * I.e., forms/input, navigation bar, etc need to be stylized
+
+    
+    - [x] \(12/07/2021) Any output messages/errors should be “user friendly”
+      - Status: Completed
+      - Direct Link:
+        - https://ks874-prod.herokuapp.com/partials/flash.php
+      - Pull Request:
+        - https://github.com/i-am-kalrav/IT202-003/pull/29
+      - Screenshots are viewable in the above Pull Request
+      * Any technical errors or debug output displayed will result in a loss of points
+
+    
+    - [x] \(12/07/2021) User will be able to see their profile
+      - Status: Completed
+      - Direct Link:
+        - https://ks874-prod.herokuapp.com/Project/profile.php
+      - Pull Request:
+        - https://github.com/i-am-kalrav/IT202-003/pull/30
+      - Screenshots are viewable in the above Pull Request
+      * Email, username, etc should be visible in profile page
+
+    
+    - [x] \(12/07/2021) User will be able to edit their profile
+      - Status: Completed
+      - Direct Link:
+        - https://ks874-prod.herokuapp.com/Project/profile.php
+      - Pull Request:
+        - https://github.com/i-am-kalrav/IT202-003/pull/31
+      - Screenshots are viewable in the above Pull Request
+      * Changing username/email should properly check to see if it’s available before allowing the change
+      * Any other fields should be properly validated
+      * Allow password reset (only if the existing correct password is provided)
+        * Hint: logic for the password check would be similar to login
+
 
 - Milestone 2
 - Milestone 3
