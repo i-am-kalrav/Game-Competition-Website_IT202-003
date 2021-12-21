@@ -143,44 +143,81 @@
 
 
 - Milestone 2
-    - [ ] \(mm/dd/yyyy of completion) Pick a simple game to implement, anything that generates a score that’s more advanced than a simple random number generator (may build off of a sample from the site shared in class)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
+    - [x] \(12/20/2021) Pick a simple game to implement, anything that generates a score that’s more advanced than a simple random number generator (may build off of a sample from the site shared in class)
+      * What game will you be doing?
+          * **Arcade Shooter**
+      * Briefly describe it.
+          * Edited the Shoot 'Em game. We can avoid or kill enemies by shooting them. We can collect power ups which increase ship speed, bullet speed and bullet size. If power is collected using bullets, then score is also incremented. Game is not over if the enemy reaches wall behind our ship (unless you had 0 points); there is a score decrement in that case. Game Over only occurs in the case  of enemy colliding directly with the ship.
+      * **Note**: For this milestone the game doesn’t need to be complete, just have something basic or a placeholder that can generate a score when played.
+        - Status: Completed
+        - Direct Link:
+          - https://ks874-prod.herokuapp.com/Project/game.php
+        - Pull Requests
+          - https://github.com/i-am-kalrav/IT202-003/pull/55
+        - Screenshots
+          - Arcade Shooter Game:
+            ![image](https://user-images.githubusercontent.com/73673683/146851283-c35b9fad-a159-410f-8596-1d6958e7a90d.png)
 
-    - [ ] \(mm/dd/yyyy of completion) The system will save the user’s score at the end of the game if the user is logged in
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+
+    - [x] \(12/20/2021) The system will save the user’s score at the end of the game if the user is logged in
+      * There should be a scores table (id, user_id, score, created)
+      * Each received score is a new entry (scores will not be updated)
+        - Status: Completed
+        - Direct Link:
+          - https://ks874-prod.herokuapp.com/Project/game.php
+          - https://ks874-prod.herokuapp.com/Project/sql/007_create_table_scores.sql
+          - https://ks874-prod.herokuapp.com/Project/api/save_score.php
+        - Pull Requests
+          - https://github.com/i-am-kalrav/IT202-003/pull/56
+        - Screenshots
+          - Scores Table:
+            ![image](https://user-images.githubusercontent.com/73673683/146854115-0c66fbeb-e25c-4216-93c3-eb6f6c0a3b81.png)
+            ![image](https://user-images.githubusercontent.com/73673683/146854194-74c0a981-99a1-4f30-a3fc-67e8c56bf068.png)
+
+          - Insert new Score into Scores Table:
+            ![image](https://user-images.githubusercontent.com/73673683/146854328-b8765e5b-1225-4305-8742-e13a582a913f.png)
+            ![image](https://user-images.githubusercontent.com/73673683/146854382-56f29599-17b2-4b7e-8117-79db24e7a24d.png)
+            ![image](https://user-images.githubusercontent.com/73673683/146854432-f7ba875e-2c5c-4dae-b9e6-ff45060955cf.png)
     
-    - [ ] \(mm/dd/yyyy of completion) The user will be able to see their last 10 scores
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - [x] \(12/20/2021) The user will be able to see their last 10 scores
+      * Show on their profile page
+      * Ordered by most recent
+        - Status: Completed
+        - Direct Link:
+          - https://ks874-prod.herokuapp.com/Project/profile.php
+        - Pull Requests
+          - https://github.com/i-am-kalrav/IT202-003/pull/57
+        - Screenshots
+          - Latest 10 Scores of the User that is logged in:
+            - User = Kalrav
+              ![image](https://user-images.githubusercontent.com/73673683/146855503-7ea6eddb-e584-4597-9d2a-94e982eea45d.png)
+            - User = Amit
+              ![image](https://user-images.githubusercontent.com/73673683/146855573-727cb529-4e3d-47c6-a226-1174137d568e.png)
+
 
     
-    - [ ] \(mm/dd/yyyy of completion) Create functions that output the following scoreboards (this will be used later)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+    - [x] \(12/20/2021) Create functions that output the following scoreboards (this will be used later)
+      * Top 10 Weekly
+      * Top 10 Monthly
+      * Top 10 Lifetime
+      * Scoreboards should show no more than 10 results; if there are no results a proper message should be displayed (i.e., “No [time period] scores to display”)
+        - Status: Completed
+        - Direct Link:
+          - https://ks874-prod.herokuapp.com/Project/home.php
+          - https://ks874-prod.herokuapp.com/partials/highscore_table.php
+          - https://ks874-prod.herokuapp.com/lib/functions.php
+        - Pull Requests
+          - https://github.com/i-am-kalrav/IT202-003/pull/58
+        - Screenshots
+          - Function to get weekly, monthly and all-time top 10 scores:
+            ![image](https://user-images.githubusercontent.com/73673683/146856593-b5916477-4d3b-4f71-aef5-bab9e60dcdcb.png)
+          - ScoreBoards:
+            - Weekly:
+              ![image](https://user-images.githubusercontent.com/73673683/146856742-dd814073-dcbe-431b-a004-2f400bda453a.png)
+            - Monthly:
+              ![image](https://user-images.githubusercontent.com/73673683/146856762-0f358e9a-fa16-4761-8e08-3f6c105389bd.png)
+            - All-time:
+              ![image](https://user-images.githubusercontent.com/73673683/146856788-af6fd138-387d-493b-9da6-41d21426e9b6.png)
 
 
 
