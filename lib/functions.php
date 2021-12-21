@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "/db.php");
 $BASE_PATH = '/Project/';//This is going to be a helper for redirecting to our base project path since it's nested in another folder
+
 function se($v, $k = null, $default = "", $isEcho = true) {
     if (is_array($v) && isset($k) && isset($v[$k])) {
         $returnValue = $v[$k];
@@ -178,4 +179,84 @@ function refresh_last_login() {
             error_log("Unknown error during date check: " . var_export($e->errorInfo, true));
         }
     }
+}
+
+//function get_top_10($duration = "day") {
+function get_top_10($duration = "week") {//             <---------------------------- Function for the weekly, monthly and all-time top scores
+    //$d = "day";
+    $d = "week";
+    //if (in_array($duration, ["day", "week", "month", "lifetime"])) {
+    if (in_array($duration, ["week", "month", "lifetime"])) {
+        //variable is safe
+        $d = $duration;
+    }
+    $db = getDB();
+    //Note: In my project I'll be using modified instead of created datetime since I actually update the score
+    //in general, created timestamp is sufficient
+    //$query = "SELECT user_id,username, score, Scores.modified from Scores join Users on Scores.user_id = Users.id";
+    $query = "SELECT user_id,username, score, Scores.created from Scores join Users on Scores.user_id = Users.id";
+    if ($d !== "lifetime") {
+        //be very careful passing in a variable directly to SQL, I ensure it's a specific value from line 390
+        //$query .= " WHERE modified >= DATE_SUB(NOW(), INTERVAL 1 $d)";
+        $query .= " WHERE Scores.created >= DATE_SUB(NOW(), INTERVAL 1 $d)";
+    }
+    //remember to prefix any ambiguous columns (Users and Scores both have created)
+    //$query .= " ORDER BY score Desc, Scores.modified desc LIMIT 10"; //newest of the same score is ranked higher
+    $query .= " ORDER BY score Desc, Scores.created desc LIMIT 10"; //newest of the same score is ranked higher
+
+    $stmt = $db->prepare($query);
+    $results = [];
+    try {
+        $stmt->execute();
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $results = $r;
+        }
+    } catch (PDOException $e) {
+        error_log("Error fetching scores for $d: " . var_export($e->errorInfo, true));
+    }
+    return $results;
+}
+
+function get_latest_scores($user_id, $limit = 10) {
+    if ($limit < 1 || $limit > 50) {
+        $limit = 10;
+    }
+    //$query = "SELECT score, modified from Scores where user_id = :id ORDER BY modified desc LIMIT :limit";
+    $query = "SELECT score, created from Scores where user_id = :id ORDER BY created desc LIMIT :limit";
+    $db = getDB();
+    //IMPORTANT: this is required for the execute to set the limit variables properly
+    //otherwise it'll convert the values to a string and the query will fail since LIMIT expects only numerical values and doesn't cast
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    //END IMPORTANT
+
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute([":id" => $user_id, ":limit" => $limit]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            return $r;
+        }
+    } catch (PDOException $e) {
+        error_log("Error getting latest $limit scores for user $user_id: " . var_export($e->errorInfo, true));
+    }
+    return [];
+}
+
+function new_score($score) {  
+    //$points_today = $newScore;
+    $user = get_user_id();
+    
+    //$query = "INSERT INTO Scores(score, user_id) VALUES(newScore, $user)";
+    $db = getDB();
+    //$stmt = $db->prepare($query);
+    $query = "INSERT INTO Scores (score, user_id) VALUES (:score, :uid)";
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute([ ":score" => $score, ":uid" => $user]);
+        error_log("Created new score entry for $user to $score");
+    } catch (PDOException $e) {
+        error_log("Error creating record for today's score for $user with $score: " . var_export($e->errorInfo, true));
+    }
+    return;
 }

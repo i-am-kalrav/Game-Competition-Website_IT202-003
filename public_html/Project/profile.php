@@ -85,9 +85,12 @@ if (isset($_POST["save"])) {
 <?php
 $email = get_user_email();
 $username = get_username();
-$id = se($_GET, "id", -1, false);
+//$id = se($_GET, "id", -1, false);
+$id = se($_SESSION["user"], "id", false, false);
 $isMe = true;
 $userData = [];
+
+$scores = get_latest_scores($id);
 
 ?>
 <div class="container-fluid">
@@ -122,11 +125,48 @@ $userData = [];
             </div>
             <input class="btn btn-primary" type="submit" value="Update Profile" name="save" />
         </form>
-    <?php else : ?>
-        <?php /* Viewing someone elses profile */ ?>
-        <?php $title = se($username, null, "", false) . "'s Profile";
-        include(__DIR__ . "/../../partials/title.php"); ?>
-    <?php endif; ?>
+
+        <div class="card">
+                <div class="card-body">
+                    <div class="card-text">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <div class="fw-bold fs-3">
+                                        Latest 10 Scores:
+                                    </div>
+                                </div>
+                                <div class="card-text">
+                                    <table class="table">
+                                        <thead>
+                                            <th>Score</th>
+                                            <th>Date</th>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!$scores || count($scores) == 0) : ?>
+                                                <tr>
+                                                    <td>No scores available yet</td>
+                                                </tr>
+                                            <?php else : ?>
+                                                <?php foreach ($scores as $result) : ?>
+                                                    <tr>
+                                                        <td><?php se($result, "score"); ?></td>
+                                                        <td><?php se($result, "created"); ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <?php else : ?>
+            <p>There was a problem looking up the scores, please try again later.</p>
+        <?php endif; ?>
 </div>
 <script>
     function validate(form) {
