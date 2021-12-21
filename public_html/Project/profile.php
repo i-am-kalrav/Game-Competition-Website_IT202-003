@@ -85,7 +85,8 @@ if (isset($_POST["save"])) {
 <?php
 $email = get_user_email();
 $username = get_username();
-$id = se($_GET, "id", -1, false);
+//$id = se($_GET, "id", -1, false);
+$id = se($_SESSION["user"], "id", false, false);
 $isMe = true;
 $userData = [];
 
@@ -144,7 +145,7 @@ $scores = get_latest_scores($id);
                                         <tbody>
                                             <?php if (!$scores || count($scores) == 0) : ?>
                                                 <tr>
-                                                    <td>No scores available</td>
+                                                    <td>No scores available yet</td>
                                                 </tr>
                                             <?php else : ?>
                                                 <?php foreach ($scores as $result) : ?>

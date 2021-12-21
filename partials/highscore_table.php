@@ -37,12 +37,12 @@ switch ($duration) {
                 <thead>
                     <th>User</th>
                     <th>Score</th>
-                    <th>Achieved</th>
+                    <th>Date</th>
                 </thead>
                 <tbody>
                     <?php if (!$results || count($results) == 0) : ?>
                         <tr>
-                            <td>No scores available</td>
+                            <td>No scores available yet</td>
                         </tr>
                     <?php else : ?>
                         <?php foreach ($results as $result) : ?>

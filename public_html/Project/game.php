@@ -176,6 +176,9 @@ if (!is_logged_in()) {
             context.textAlign = 'center';
             context.fillText('Game Over. Final Score: ' + score, canvas.width / 2, canvas.height / 2);
             //return score;
+            if (score == -1){
+                    score++;
+            }
             try{
                 let http = new XMLHttpRequest();
                 http.onreadystatechange = () => {
@@ -190,7 +193,7 @@ if (!is_logged_in()) {
                 }
                 http.open("POST", "api/save_score.php", true);
                 http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                http.send(`score = ${score}`);
+                http.send(`score=${score}`);
                 flash("New Score added successfully to your records.", "success");
             }
             catch{
@@ -368,40 +371,10 @@ if (!is_logged_in()) {
         context.textAlign = 'left';
         context.fillText('Score: ' + score + "\tLives: " + lives , 1, 25)
         if (gameOver) {
-            //new_score(score);
-            <!--<?php
-            //$id = se($_GET, "id", -1, false);
-            //new_score(score);
-            ?>-->
+            if (score == -1){
+                score++;
+            }
             endGame();
-            /*try{
-                let http = new XMLHttpRequest();
-                http.onreadystatechange = () => {
-                    if (http.readyState == 4) {
-                        if (http.status === 200) {
-                        let data = JSON.parse(http.responseText);
-                        console.log("received data", data);
-                        flash(data.message, "success");
-                        }
-                        console.log(http);
-                    }
-                }
-                http.open("POST", "game.php", true);
-                http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                http.send(score=${score});
-                flash("New Score added successfully to your records.", "success");
-            }
-            catch{
-                flash("Error while adding new score to your records. New Score not addes to records.", "warning");
-            }*/
-            //endGame();
-            /*try{
-                new_score(score);
-                flash("New Score added successfully to your records.", "success");
-            }
-            catch{
-                flash("Error while adding new score to your records. New Score not addes to records.", "warning");
-            }*/
         } else {
             window.requestAnimationFrame(draw);
         }
