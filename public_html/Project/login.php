@@ -6,18 +6,18 @@ if (isset($_POST["submit"])) {
 
     $isValid = true;
     if (!isset($email) || !isset($password)) {
-        flash("Must provide email and password", "warning");
+        flash("Must provide email/username and password", "warning");
         $isValid = false;
     }
     if (strlen($password) < 3) {
         flash("Password must be 3 or more characters", "warning");
         $isValid = false;
     }
-    $email = sanitize_email($email);
-    if (!is_valid_email($email)) {
+    //$email = sanitize_email($email);  <-------- Because login with both email and username
+    /*if (!is_valid_email($email)) {
         flash("Invalid email", "warning");
         $isValid = false;
-    }
+    }*/
     if ($isValid) {
         //do our registration
         $db = getDB();
@@ -48,23 +48,22 @@ if (isset($_POST["submit"])) {
                     }
                     //echo "<pre>" . var_export($_SESSION, true) . "</pre>";
 
-                    //fetch account info, or create an account if the user existed before this feature was added
-                    //in my project, a user will have only 1 account associated with them so it's a 1:1 relationship
                     get_or_create_account(); //applies directly to the session, make sure it's called after the session is set
-                    //added Module 08 - reward player a login bonus
+
                     refresh_last_login();
-                    //added Module 10
                     //put the function here as it's the least frequent "activation" that won't go too long without running
-                    calc_winners_or_expire();//This can cost up to ~100 queries
+                    //calc_winners_or_expire();//This can cost up to ~100 queries
                     die(header("Location: home.php"));
                 } else {
-                    se("Passwords don't match");
+                    //flash("Passwords don't match");
+                    flash("Incorrect password");
                 }
             } else {
-                se("User doesn't exist");
+                flash("User doesn't exist");
             }
         } catch (Exception $e) {
             echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            flash("An unexpected error occurred, please try again", "danger");
         }
     }
 }
@@ -73,8 +72,8 @@ if (isset($_POST["submit"])) {
     <h1>Login</h1>
     <form method="POST" onsubmit="return validate(this);">
         <div class="mb-3">
-            <label class="form-label" for="email">Email: </label>
-            <input class="form-control" type="email" id="email" name="email" required />
+            <label class="form-label" for="email">Email/Username: </label>
+            <input class="form-control" type="text" id="email" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" required />
         </div>
         <div class="mb-3">
             <label class="form-label" for="pw">Password: </label>
@@ -96,10 +95,10 @@ if (isset($_POST["submit"])) {
         if (password) {
             password = password.trim();
         }
-        if (email.indexOf("@") === -1) {
+        /*if (email.indexOf("@") === -1) {
             isValid = false;
             alert("Invalid email");
-        }
+        }*/
         if (password.length < 3) {
             isValid = false;
             alert("Password must be 3 or more characters");
