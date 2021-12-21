@@ -43,6 +43,7 @@ require_once(__DIR__ . "/../lib/functions.php");
             <?php if (is_logged_in()) : ?>
                 <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="game.php">Play Game</a></li>
             <?php endif; ?>
             <?php if (!is_logged_in()) : ?>
                 <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
