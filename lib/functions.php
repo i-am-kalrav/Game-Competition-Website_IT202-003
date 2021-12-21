@@ -182,7 +182,7 @@ function refresh_last_login() {
 }
 
 //function get_top_10($duration = "day") {
-function get_top_10($duration = "week") {
+function get_top_10($duration = "week") {//             <---------------------------- Function for the weekly, monthly and all-time top scores
     //$d = "day";
     $d = "week";
     //if (in_array($duration, ["day", "week", "month", "lifetime"])) {
