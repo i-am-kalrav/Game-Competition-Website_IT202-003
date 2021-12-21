@@ -40,7 +40,7 @@ if (!is_logged_in()) {
         // Arcade Shooter game
 
         // Get a reference to the canvas DOM element
-        var canvas = document.getElementById('canvas');
+        var canvas = document.getElementById('canvas');//                          <------------ Arcade Shooter Game
         // Get the canvas drawing context
         var context = canvas.getContext('2d');
 
