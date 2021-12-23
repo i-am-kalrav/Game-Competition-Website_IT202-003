@@ -262,7 +262,7 @@ function change_points($points, $user, $reason, $forceAllowZero = false) {
     //I'm choosing to ignore the record of 0 point transactions
 
     if ($points != 0 || $forceAllowZero) {
-        $query = "INSERT INTO PointsHistory (user_id, point_change, reason) 
+        $query = "INSERT INTO PointsHistory (user_id, point_change, reason), 
             VALUES (:uid, :pc, :r)";
         
         $params[":uid"] = $user;
