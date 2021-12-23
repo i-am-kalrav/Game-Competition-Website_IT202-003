@@ -342,13 +342,13 @@ function refresh_last_login() {
     }
 }
 
-function pagination_filter($newPage) {
+function pagination_filter($newPage) {//                <-------------------These 2 functions are for pagination
     $_GET["page"] = $newPage;
     //php.net/manual/en/function.http-build-query.php
     return se(http_build_query($_GET));
 }
 /** Runs two queries, one to get the total_records for the potentially filtered data, and the other to return the paginated data */
-function paginate($query, $params = [], $records_per_page = 10) {
+function paginate($query, $params = [], $records_per_page = 10) {//                <-------------------These 2 functions are for pagination
 
     global $total_records; //used for pagination display after this function
     global $page; //used for pagination display after this function
