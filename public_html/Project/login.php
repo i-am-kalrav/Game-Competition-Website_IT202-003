@@ -23,7 +23,7 @@ if (isset($_POST["submit"])) {
         $db = getDB();
         //$stmt = $db->prepare("INSERT INTO Users (email, password) VALUES (:email, :password)");
         //$hash = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $db->prepare("SELECT id, email, IFNULL(username, email) as `username`, password from Users where email = :email or username = :email LIMIT 1");
+        $stmt = $db->prepare("SELECT id, email, points, IFNULL(username, email) as `username`, password from Users where email = :email or username = :email LIMIT 1");
         try {
             $stmt->execute([":email" => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,12 +48,15 @@ if (isset($_POST["submit"])) {
                     }
                     //echo "<pre>" . var_export($_SESSION, true) . "</pre>";
 
-                    get_or_create_account(); //applies directly to the session, make sure it's called after the session is set
+                    
+                    get_user_points();
+                    //get_or_create_account(); //applies directly to the session, make sure it's called after the session is set
 
                     refresh_last_login();
                     //put the function here as it's the least frequent "activation" that won't go too long without running
                     //calc_winners_or_expire();//This can cost up to ~100 queries
-                    die(header("Location: home.php"));
+                    //die(header("Location: home.php"));
+                    redirect("home.php");
                 } else {
                     //flash("Passwords don't match");
                     flash("Incorrect password");
