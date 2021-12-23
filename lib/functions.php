@@ -342,6 +342,64 @@ function refresh_last_login() {
     }
 }
 
+function pagination_filter($newPage) {
+    $_GET["page"] = $newPage;
+    //php.net/manual/en/function.http-build-query.php
+    return se(http_build_query($_GET));
+}
+/** Runs two queries, one to get the total_records for the potentially filtered data, and the other to return the paginated data */
+function paginate($query, $params = [], $records_per_page = 10) {
+
+    global $total_records; //used for pagination display after this function
+    global $page; //used for pagination display after this function
+    //what page is the user on?
+    //ensure we're not less than page 1 (page 1 is so it makes sense to the user, we'll convert it to 0)
+    $page = se($_GET, "page", 1, false);
+    if ($page < 1) {
+        $page = 1;
+    }
+
+    $db = getDB();
+
+    //get the total records for the current filtered (if applicable) data
+    //this will get the get the part of the query after FROM
+    $t_query = "SELECT count(1) as `total` FROM " . explode(" FROM ", $query)[1];
+    //var_dump($t_query);
+    $stmt = $db->prepare($t_query);
+    try {
+        $stmt->execute($params);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $total_records = (int)se($result, "total", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error getting total records: " . var_export($e->errorInfo, true));
+    }
+    $offset = ($page - 1) * $records_per_page;
+    //get the data 
+    $query .= " LIMIT :offset, :limit";
+    //IMPORTANT: this is required for the execute to set the limit variables properly
+    //otherwise it'll convert the values to a string and the query will fail since LIMIT expects only numerical values and doesn't cast
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    //END IMPORTANT
+    $stmt = $db->prepare($query);
+    $results = [];
+    try {
+        $params[":offset"] = $offset;
+        $params[":limit"] = $records_per_page;
+        //var_dump($params);
+        $stmt->execute($params);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "<pre>";
+        var_dump($e);
+        echo "</pre>";
+        error_log("Error getting records: " . var_export($e->errorInfo, true));
+        flash("There was a problem with your request, please try again", "warning");
+    }
+    return $results;
+}
+
 //function get_top_10($duration = "day") {
 function get_top_10($duration = "week") {//             <---------------------------- Function for the weekly, monthly and all-time top scores
     //$d = "day";
