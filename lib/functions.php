@@ -511,7 +511,7 @@ function join_competition($comp_id){//, $isCreator = false) {
 /** Runs an "expensive" query to find the potential top 3 users/players of a competition.
  * Returns their id, username, and max score
  */
-function get_competition_top($comp_id) {
+function get_competition_top($comp_id) {//                 <------------------------------This function gives top 3 of a competition
     if ($comp_id <= 0) {
         return [];
     }
@@ -550,7 +550,7 @@ function get_competition_top($comp_id) {
     return $top;
 }
 
-function calc_winners_or_expire() {
+function calc_winners_or_expire() {//                 <-------------------This function gives rewards to the top 3 of a competition and updates all the entries in the tables
     error_log("Starting calc/expire process");
     //do time check
     $db = getDB();
