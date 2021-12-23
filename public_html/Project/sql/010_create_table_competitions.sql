@@ -14,10 +14,6 @@ CREATE TABLE IF NOT EXISTS Competitions(
     second_place_per int,
     third_place_per int,
     cost_to_create int DEFAULT 0,
-    /*reward_increase float DEFAULT 1,
-    payouts VARCHAR(30) DEFAULT '.7,.3,.2' COMMENT 'CSV of payout percentages to users in that place, should total to 1.0, chose to do it slightly different than the proposal',
-    did_payout tinyint(1) DEFAULT 0,
-    is_expired tinyint(1) DEFAULT 0 COMMENT 'convenience for expirey check queries',*/
     expires TIMESTAMP,
     /*expires CURRENT_TIMESTAMP + duration,*/
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
