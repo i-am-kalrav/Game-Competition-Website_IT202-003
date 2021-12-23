@@ -34,6 +34,7 @@ switch ($duration) {
             </div>
         </div>
         <div class="card-text">
+            <th class="nav-item"><a class="nav-link" href="game.php">Play Game</a></th>
             <table class="table">
                 <thead>
                     <th>User</th>
