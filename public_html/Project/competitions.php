@@ -2,7 +2,6 @@
 require_once(__DIR__ . "/../../partials/nav.php");
 if (!is_logged_in()) {
     flash("You must be logged in to access this page", "danger");
-
     //die(header("Location: " . $BASE_PATH));
     redirect($BASE_PATH);
 }
