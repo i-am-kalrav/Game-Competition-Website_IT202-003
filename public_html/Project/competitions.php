@@ -9,27 +9,28 @@ if (!is_logged_in()) {
 
 $results = [];
 $db = getDB();
-//In the real world, you'd want to profile the difference between doing a subselect or a LEFT/RIGHT join
-// on Competitions and UserCompetitions to see which is more performant
-// the subselect I'm doing here is just checking if the logged in user is associated to this competition (i.e., they registered/joined)
 $filter = se($_GET, "filter", "active", false);
+
 if($filter === "joined"){
     $query =
         "SELECT c.id,name, current_reward, min_participants, current_participants, join_fee, if(expires <= current_timestamp(),'expired', expires) as expires, 1 as joined FROM Competitions c 
  JOIN CompetitionParticipants cp WHERE cp.user_id = :uid AND cp.comp_id = c.id ORDER BY expires asc limit 10";
 }
+
 else if($filter === "expired"){
     $query =
         "SELECT id,name, current_reward, min_participants, current_participants, join_fee, if(expires <= current_timestamp(),'expired', expires) as expires,
 (select IFNULL(count(1),0) FROM CompetitionParticipants cp WHERE cp.user_id = :uid AND cp.comp_id = c.id) as joined FROM Competitions c 
 WHERE expires <= current_timestamp() ORDER BY expires asc limit 10";
 }
+
 else{
 $query =
         "SELECT id,name, current_reward, min_participants, current_participants, join_fee, if(expires <= current_timestamp(),'expired', expires) as expires,
 (select IFNULL(count(1),0) FROM CompetitionParticipants cp WHERE cp.user_id = :uid AND cp.comp_id = c.id) as joined FROM Competitions c 
 WHERE expires > current_timestamp() AND paid_out = 0 ORDER BY expires asc limit 10";
 }
+
 $stmt = $db->prepare($query);
 try {
     //TODO add other filters for when there are a ton of competitions (i.e., filter by name or other attributes)
