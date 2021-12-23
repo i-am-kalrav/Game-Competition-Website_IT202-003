@@ -2,7 +2,6 @@
 require_once(__DIR__ . "/../../partials/nav.php");
 if (!is_logged_in()) {
     flash("You must be logged in to access this page", "danger");
-
     //die(header("Location: " . $BASE_PATH));
     redirect($BASE_PATH);
 }
@@ -32,6 +31,7 @@ WHERE expires > current_timestamp() AND paid_out = 0 ORDER BY expires asc limit 
 }
 
 $stmt = $db->prepare($query);
+
 try {
     //TODO add other filters for when there are a ton of competitions (i.e., filter by name or other attributes)
     $stmt->execute([":uid" => get_user_id()]);

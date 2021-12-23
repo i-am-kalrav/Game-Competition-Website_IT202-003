@@ -342,13 +342,29 @@ function refresh_last_login() {
     }
 }
 
-function pagination_filter($newPage) {
+function get_best_score($user_id) {
+    $query = "SELECT score from Scores WHERE user_id = :id ORDER BY score desc LIMIT 1";
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute([":id" => $user_id]);
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            return (int)se($r, "score", 0, false);
+        }
+    } catch (PDOException $e) {
+        error_log("Error fetching best score for user $user_id: " . var_export($e->errorInfo, true));
+    }
+    return 0;
+}
+
+function pagination_filter($newPage) {//                <-------------------These 2 functions are for pagination
     $_GET["page"] = $newPage;
     //php.net/manual/en/function.http-build-query.php
     return se(http_build_query($_GET));
 }
 /** Runs two queries, one to get the total_records for the potentially filtered data, and the other to return the paginated data */
-function paginate($query, $params = [], $records_per_page = 10) {
+function paginate($query, $params = [], $records_per_page = 10) {//                <-------------------These 2 functions are for pagination
 
     global $total_records; //used for pagination display after this function
     global $page; //used for pagination display after this function
