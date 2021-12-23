@@ -1,3 +1,4 @@
 <?php
 //my only purpose is to go home
-die(header("Location: home.php"));
+//die(header("Location: home.php"));
+redirect("home.php");

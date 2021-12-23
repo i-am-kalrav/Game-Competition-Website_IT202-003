@@ -6,4 +6,5 @@ session_destroy();
 session_start();
 require_once(__DIR__ . "/../../lib/functions.php");
 flash("You have been logged out", "success");
-die(header("Location: login.php"));
+//die(header("Location: login.php"));
+redirect("login.php");
