@@ -31,6 +31,7 @@ WHERE expires > current_timestamp() AND paid_out = 0 ORDER BY expires asc limit 
 }
 
 $stmt = $db->prepare($query);
+
 try {
     //TODO add other filters for when there are a ton of competitions (i.e., filter by name or other attributes)
     $stmt->execute([":uid" => get_user_id()]);
