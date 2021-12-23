@@ -10,6 +10,7 @@ if (!is_logged_in()) {
 $results = [];
 $db = getDB();
 $filter = se($_GET, "filter", "active", false);
+
 if($filter === "joined"){
     $query =
         "SELECT c.id,name, current_reward, min_participants, current_participants, join_fee, if(expires <= current_timestamp(),'expired', expires) as expires, 1 as joined FROM Competitions c 
