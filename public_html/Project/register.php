@@ -39,7 +39,8 @@ if (isset($_POST["submit"])) {
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("You've successfully registered, please login");
-            die(header("Location: login.php"));
+            //die(header("Location: login.php"));
+            redirect("login.php");
         } catch (PDOException $e) {
             $code = se($e->errorInfo, 0, "00000", false);
             if ($code === "23000") {

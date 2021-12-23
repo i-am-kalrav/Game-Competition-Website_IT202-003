@@ -2,7 +2,8 @@
 require_once(__DIR__ . "/../../partials/nav.php");
 //require_once(__DIR__ . "/api/save_score.php");
 if (!is_logged_in()) {
-    die(header("Location: login.php"));
+    //die(header("Location: login.php"));
+    redirect("login.php");
 }
 ?>
 
