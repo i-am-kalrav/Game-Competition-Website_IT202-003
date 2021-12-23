@@ -24,37 +24,6 @@ if (!is_logged_in()) {
     $first_place_per = (int)se($_POST, "first_place_per", false, false);
     $second_place_per = (int)se($_POST, "second_place_per", false, false);
     $third_place_per = (int)se($_POST, "third_place_per", false, false);
-    /*switch ($payout_split) {
-        case "2":
-            $payout = ".8,.2";
-            $first_per = 80;
-            $second_per = 20;
-            break;
-        case "3":
-            $payout = ".7,.2,.1";
-            $first_per = 0;
-            $second_per = 0;
-            $third_per = 0;
-            break;
-        case "4":
-            $payout = ".6,.3,.1";
-            $first_per = 0;
-            $second_per = 0;
-            $third_per = 0;
-            break;
-        case "5":
-            $payout = ".34,.33,.33";
-            $first_per = 0;
-            $second_per = 0;
-            $third_per = 0;
-            break;
-        default:
-            $payout = "1";
-            $first_per = 0;
-            $second_per = 0;
-            $third_per = 0;
-            break;
-    }*/
     $isValid = true;
     //validate
     if ($starting_reward < 0) {
