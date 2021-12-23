@@ -222,95 +222,207 @@
 
 
 - Milestone 3
-  - [ ] \(mm/dd/yyyy of completion) Users will have points associated with their account.
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+  - [x] \(12/22/2021) Users will have points associated with their account.
+    * Alter the User table to include points with a default of 0.
+        * This field will not be incremented/decremented directly, you must use the PointsHistory table to calculate it and set it each time the points change
+    * Points should show on their profile page
+        * You may show points elsewhere _as well_ if you wish
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/home.php
+      - https://ks874-prod.herokuapp.com/Project/sql/008_alter_table_users_points.sql
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/71
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Users table now has points column:
+          ![image](https://user-images.githubusercontent.com/73673683/147211524-34e868b0-f7d0-427e-994f-f2852d1a66e1.png)
+
+      - Points (Balance) visible on every page on the nav bar itself:
+          ![image](https://user-images.githubusercontent.com/73673683/147211792-30c67cb7-b9cc-4c6b-8070-3b37295cb3ce.png)
   
-  - [ ] \(mm/dd/yyyy of completion) Create a PointsHistory table (id, user_id, point_change, reason, created)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+  - [x] \(12/22/2021) Create a PointsHistory table (id, user_id, point_change, reason, created)
+    * Any new entry should update the user’s points value (do not update the User points column directly)
+        * SUM the point_change for the user_id to get the total
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/sql/009_create_table_pointshistory.sql
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/72
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - PointsHistory Table:
+        - SQL
+          ![image](https://user-images.githubusercontent.com/73673683/147214497-5f354354-2228-42bd-8d34-3f86399d0713.png)
+        - Actual Table
+          ![image](https://user-images.githubusercontent.com/73673683/147215367-3c2c4c27-202d-42b5-a486-ba17f7db37f7.png)
+
   
-  - [ ] \(mm/dd/yyyy of completion) Competitions table should have the following columns (id, name, created, duration, expires (now + duration), current_reward, starting_reward, join_fee, current_participants, min_participants, paid_out (boolean), min_score, first_place_per, second_place_per, third_place_per, cost_to_create, created, modified)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+  - [x] \(12/22/2021) Competitions table should have the following columns (id, name, created, duration, expires (now + duration), current_reward, starting_reward, join_fee, current_participants, min_participants, paid_out (boolean), min_score, first_place_per, second_place_per, third_place_per, cost_to_create, created, modified)
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/sql/010_create_table_competitions.sql
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/73
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Competitions Table:
+        - SQL:
+            ![image](https://user-images.githubusercontent.com/73673683/147215912-31443d19-f35c-4c4b-839c-fd992bbc9f4b.png)
+
+        - Actual Table:
+            ![image](https://user-images.githubusercontent.com/73673683/147216027-31453841-30d7-4733-8b5b-5a1fce449e27.png)
+
+            ![image](https://user-images.githubusercontent.com/73673683/147216170-ff4937a7-a2f8-42f3-b5b2-8084ea9d275e.png)
+
   
-  - [ ] \(mm/dd/yyyy of completion) User will be able to create a competition
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+  - [x] \(12/22/2021) User will be able to create a competition
+    * Competitions will start at 1 point (reward)
+    * User sets a name for the competition
+    * User determines % given for 1st, 2nd, and 3rd place winners
+        * Combination must be equal to 100% (no more, no less)
+    * User determines if it’s free to join or the cost to join (min 0 for free)
+    * User determines the duration of the competition (in days)
+    * User can determine the minimum score to qualify (min 0)
+    * User determines minimum participants for payout (min 3)
+    * Show any user friendly error messages
+    * Show user friendly confirmation message that competition was created
+    * The cost to the creator of the competition will be (1 + starting reward value)
+        * If they can’t afford it, the competition should not be created
+        * If they can afford it, automatically add them to the competition
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/create_competition.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/74
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Create Competition:
+        ![image](https://user-images.githubusercontent.com/73673683/147217694-0609bece-e608-46eb-8a65-b8c5a2a58462.png)
+
+      - create_competition.php page:
+        ![image](https://user-images.githubusercontent.com/73673683/147217870-4cedce23-5c57-4624-8d0b-836f124c19d0.png)
+
+      - Empty Name is not allowed:
+        ![image](https://user-images.githubusercontent.com/73673683/147217932-85557198-eb42-4f44-9522-27a2f36dd5e6.png)
+
+      - Created Name; Starting Reward is 1 point by default; Minimum and default duration in days is 1:
+        ![image](https://user-images.githubusercontent.com/73673683/147218164-959862cd-c674-4efd-b2fd-89547ecc08c6.png)
+
+      - Min required Participants and Score to qualify is 3;
+        ![image](https://user-images.githubusercontent.com/73673683/147218482-223604fd-bf51-4570-b244-b439c88e67fc.png)
+        ![image](https://user-images.githubusercontent.com/73673683/147218524-08c787b8-a849-4892-95b9-099c6841b972.png)
+
+      - The sum of the % rewards for the top 3 ranks needs to sum to 100%:
+        ![image](https://user-images.githubusercontent.com/73673683/147218732-55d16dc4-7d53-432b-9c95-3abcaa2a9442.png)
+        ![image](https://user-images.githubusercontent.com/73673683/147218765-40677032-65c4-4a21-bbb0-8aa4aa8af9be.png)
+        ![image](https://user-images.githubusercontent.com/73673683/147218798-e61a8671-fd31-4547-9c69-15ef90f54430.png)
+        ![image](https://user-images.githubusercontent.com/73673683/147218825-49d0efc9-f77a-4bb6-a8f7-7515e9e6bf57.png)
+
+      - When sum = 100:
+        ![image](https://user-images.githubusercontent.com/73673683/147218876-bb4fc309-873a-4720-a578-9905f40f7a57.png)
+        ![image](https://user-images.githubusercontent.com/73673683/147218911-2fadd6a9-5437-481e-9b40-81d30d69f98d.png)
+      
+      - Joined Automatically (enough points to create and join):
+        ![image](https://user-images.githubusercontent.com/73673683/147219411-89c0e6f3-014f-4da6-acf4-46f16ac6e41b.png)
+
+
   
-  - [ ] \(mm/dd/yyyy of completion) Each new participant causes the Reward value to increase by at least 1 or 50% of the joining fee rounded up
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+  - [x] \(12/22/2021) Each new participant causes the Reward value to increase by at least 1 or 50% of the joining fee rounded up
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/competitions.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/75
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Reward before Joining (for Game0 with ends date: 2021-12-25 22:03:32):
+          ![image](https://user-images.githubusercontent.com/73673683/147220432-7b976711-dbb7-46c1-a9d5-9b84afe2eceb.png)
+
+      - Reward after Joining (for Game0 with ends date: 2021-12-25 22:03:32):
+          ![image](https://user-images.githubusercontent.com/73673683/147220610-3d0fbfc0-492a-495e-8597-8325888ba6da.png)
+
   
-  - [ ] \(mm/dd/yyyy of completion) Have a page where the User can see active competitions (not expired)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+  - [x] \(12/22/2021) Have a page where the User can see active competitions (not expired)
+    * For this milestone limit the output to a maximum of 10
+    * Order the results by soonest to expire
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/competitions.php
+      - https://ks874-prod.herokuapp.com/Project/competitions.php?filter=expired
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/76
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Active Competitions Only:
+          ![image](https://user-images.githubusercontent.com/73673683/147221328-cd0069cb-f7e6-40f5-bf53-0dbcbeccbc03.png)
+
+      - Expired Competition not included in active ones:
+          ![image](https://user-images.githubusercontent.com/73673683/147221408-2f68b6c6-b7c7-45b5-ba03-617f57800cd0.png)
+
   
-  - [ ] \(mm/dd/yyyy of completion) Will need an association table CompetitionParticipants (id, comp_id, user_id, created)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+  - [x] \(12/22/2021) Will need an association table CompetitionParticipants (id, comp_id, user_id, created)
+    * Comp_id and user_id should be a composite unique key (user can only join a competition once)
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/sql/010_create_table_competitionparticipants.sql
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/77
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - CompetitionParticipants Table:
+        - Sql (With Composite Keys- The Unique Key):
+            ![image](https://user-images.githubusercontent.com/73673683/147222321-6413d0e3-c621-431b-bd46-16ace53d9516.png)
+
+        - Actual Table:
+            ![image](https://user-images.githubusercontent.com/73673683/147222582-ccf9f3de-145c-4d3f-ac69-6a96f2ef15a6.png)
+
   
-  - [ ] \(mm/dd/yyyy of completion) User can join active competitions
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+  - [x] \(12/22/2021) User can join active competitions
+    * Creates an entry in CompetitionParticipants
+    * Recalculate the Competitions.participants value based on the count of participants for this competition from the CompetitionParticipants table.
+    * Update the Competitions.reward based on the # of participants and the appropriate math from the competition requirements above
+        * Best to due this based on a simple equation via the initial Competition data and participants
+    * Show proper error message if user is already registered
+    * Show proper confirmation if user registered successfully
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/competitions.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/78
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Active Competitions (can join if not already joined):
+          ![image](https://user-images.githubusercontent.com/73673683/147226371-beee7039-8032-461c-b4d2-0e3595b7d793.png)
+
+      - No option to join if already joined:
+          ![image](https://user-images.githubusercontent.com/73673683/147226528-46bc1f1b-6ab3-41ea-9f17-639ef33bcdef.png)
+
+      - No option to join expired ones:
+          ![image](https://user-images.githubusercontent.com/73673683/147226563-c3c6ee57-b8ce-47de-941e-b7680860433d.png)
+      
+      - Joining Game a1:
+          ![image](https://user-images.githubusercontent.com/73673683/147226943-26d36fbb-e5f7-4a8f-8ea9-665d025288c0.png)
+          ![image](https://user-images.githubusercontent.com/73673683/147226962-60d9d6a0-167b-43ec-8955-ac8c7cee5c8a.png)
+
   
-  - [ ] \(mm/dd/yyyy of completion) Create function that calculates competition winners
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+  - [x] \(12/22/2021) Create function that calculates competition winners
+    * Get all expired and not paid_out competitions
+    * For each competition
+        * Check that the participant count against the minimum required
+        * Get the top 3 winners
+          * **Pick 1 (strike out the option you won’t do; do not delete):**    (Option 1 waas used)
+            * **Option 1: **Scores are calculated by the sum of the score from the Scores table where it was earned/created between Competition start and Competition expires timestamps
+            * ~~Option 2: Where the score was earned/created between when the user joined the competition and when the Competition expires~~
+        * Calculate the payout (reward * place_percent)
+            * Round up the value (it’s ok to pay out an extra point here and there)
+        * Create entries for the Users in the PointsHistory table
+            * Apply the new values (SUM) to their points column in the Users table after entry is added
+            * Reason should be recorded as ‘competition’ (or something with more precise information)
+        * Mark the competition as paid_out = true
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/lib/functions.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/79
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Function to get top 3 of the competition:
+          ![image](https://user-images.githubusercontent.com/73673683/147227746-d2b0a9be-c90a-4d54-9852-3cfd57d6c563.png)
+
+      - Function to distribute rewards where deserved and update all the necessary tables:
+          ![image](https://user-images.githubusercontent.com/73673683/147228108-af3fa8a5-d14a-4763-858a-48565b16daeb.png)
   
   
 
