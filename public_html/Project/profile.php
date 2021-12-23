@@ -4,6 +4,7 @@ if (!is_logged_in()) {
     //die(header("Location: login.php"));
     redirect("login.php");
 }
+
 ?>
 
 <?php
