@@ -427,95 +427,165 @@
   
 
 - Milestone 4
-- [ ] \(mm/dd/yyyy of completion) User can set their profile to be public or private (will need another column in Users table)
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+- [ ] \(12/23/2021) User can set their profile to be public or private (will need another column in Users table)
+  * If public, hide email address from other users
+    - Status: Incomplete
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/sql/010_create_table_competitionparticipants.sql
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/92
+      - https://github.com/i-am-kalrav/IT202-003/pull/91
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Alter table to make another column visibility:
+          ![image](https://user-images.githubusercontent.com/73673683/147249416-21e6e770-7217-4235-9478-f0a8dfaff239.png)
+      - Users Table:
+          ![image](https://user-images.githubusercontent.com/73673683/147250640-c0bc68eb-3e1c-4896-a747-f4a083f846d7.png)
+      - This feature (Public/Private Profile) is not yet complete. Although I have written some code for it, I don't have enough time to debug, troubleshoot and make it work properly with the system.
+          ![image](https://user-images.githubusercontent.com/73673683/147249130-b9a86f46-4df3-4b52-bb88-30de9c79ef57.png)
 
-- [ ] \(mm/dd/yyyy of completion) User will be able to see their competition history
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
 
-- [ ] \(mm/dd/yyyy of completion) User with the role of “admin” can edit a competition where paid_out = false
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+- [x] \(12/23/2021) User will be able to see their competition history
+  * Limit to 10 results
+  * Paginate anything after 10
+  * If no results, show the appropriate message
+    - Status: Partially Working
+      - Even though, it does show 10 records at a time, and I have the functions for pagination in functions.php, I didn't have enough time to actually implement them and make use of them.
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/competitions.php
+      - https://ks874-prod.herokuapp.com/lib/functions.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/93
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - Joined History shows all the competitions the user has joined to date:
+          ![image](https://user-images.githubusercontent.com/73673683/147251155-4b713376-f4fc-4f43-ac12-965662133e80.png)
+      - None of them has the option to join:
+          ![image](https://user-images.githubusercontent.com/73673683/147251304-b20cca9f-f067-4c37-bc8e-a8a35378483e.png)
 
-- [ ] \(mm/dd/yyyy of completion) Add pagination to the Active Competitions view
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
 
-- [ ] \(mm/dd/yyyy of completion) Anywhere a username is displayed should be a link to that user’s profile
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+- [ ] \(12/23/2021) User with the role of “admin” can edit a competition where paid_out = false
+  * They can adjust any of the regular form values
+  * If the competition was expired they can update the duration to include extra time
+    - Status: Incomplete
+      - I, unfortunately, didn't have enough time to implement the necessary features of admin.
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/competitions.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/94
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - I, unfortunately, didn't have enough time to implement the necessary features of admin:
+          ![image](https://user-images.githubusercontent.com/73673683/147252283-d703440f-37e1-46aa-ba46-d1d4dba69bb2.png)
 
-- [ ] \(mm/dd/yyyy of completion) Viewing an active or expired competition should show the top 10 scoreboard related to that competition
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
 
-- [ ] \(mm/dd/yyyy of completion) Game should be fully implemented/complete by this point
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+- [ ] \(12/23/2021) Add pagination to the Active Competitions view
+  * Show 10 competitions per page
+  * Paginate anything after 10
+  * If no results, show the appropriate message
+    - Unfortunately, I didn't have enough time to implement the 2 pagination functions and actually make use of them for the system.
+    - Status: Partially working
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/lib/functions.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/95
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - I have these 2 functions for pagination:
+          ![image](https://user-images.githubusercontent.com/73673683/147253104-4262fd20-8f7c-4104-803c-59728e1590fa.png)
 
-- [ ] \(mm/dd/yyyy of completion) User’s score history will include pagination
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
-    - Pull Requests
-      - PR link #1 (repeat as necessary)
-    - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
 
-- [ ] \(mm/dd/yyyy of completion) Home page will have a weekly, monthly, and lifetime scoreboard
-  -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+- [ ] \(12/23/2021) Anywhere a username is displayed should be a link to that user’s profile
+  * This includes all scoreboards
+  * If the profile is private you can have the page just display “this profile is private” upon access
+    - Status: Partially Working
+      - The links were working as intended during the Milestone2 phase, but currently are malfunctioning and redirecting to the logged in user's own profile page.
+      - I could likely figure it out and resolve the issue, but unfortunately, I am extremely short on time and I can't have the opportunity to play around with the system while debugging its contents
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/i-am-kalrav/IT202-003/pull/96
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - All User Names have Links:
+          ![image](https://user-images.githubusercontent.com/73673683/147255493-d5ae83a6-1edd-4821-bcfb-8960af402143.png)
+          ![image](https://user-images.githubusercontent.com/73673683/147255923-d4dfc5cd-a470-4d6e-b97d-7cd9b1273c74.png)
+
+
+- [ ] \(12/23/2021) Viewing an active or expired competition should show the top 10 scoreboard related to that competition
+    - Status: Almost Partially Working
+      - Again, I have the functions for pagination, but because of me being late and therefore short on time, I did not have the opportunity to try implementing these functions properly.
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/competitions.php
+    - Pull Requests
+      - https://github.com/i-am-kalrav/IT202-003/pull/97
+    - Screenshots
+      - 10 competitions show up on the page at a time.
+      - Active Competitions:
+          ![image](https://user-images.githubusercontent.com/73673683/147257572-d28e4b9f-ef19-4469-91c7-3320a589bebf.png)
+      - Expired Competitions:
+          ![image](https://user-images.githubusercontent.com/73673683/147257651-68b4a670-9019-49a3-8481-0df88f47f988.png)
+
+
+- [x] \(12/23/2021) Game should be fully implemented/complete by this point
+  - Game should tell the player if they’re not logged in that their score will not be recorded.
+    - Status: Completed
+      - We cannot access the game without being logged in. So to get our score saved, we need to make sure to log in and then play the game. That is the only instance in which the score of a game is saved.
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/game.php
+    - Pull Requests
+      - https://github.com/i-am-kalrav/IT202-003/pull/98
+    - Screenshots
+      - Game works as intended:
+          ![image](https://user-images.githubusercontent.com/73673683/147259193-3a40028e-7044-4134-bfea-0801d2ffbfb4.png)
+      - Score is saved because user is logged in:
+          ![image](https://user-images.githubusercontent.com/73673683/147259408-c3a3be56-4e29-4053-8c6c-646d8b2ef240.png)
+
+      - If we try to access the page while being logged out:
+          ![image](https://user-images.githubusercontent.com/73673683/147259546-67e0363a-3221-4057-82b7-9a8a8fb942a9.png)
+          ![image](https://user-images.githubusercontent.com/73673683/147259525-0b16b638-4e2d-41c4-bb1e-add9bdc48a97.png)
+
+      - We are redirected to the login page to first login before playing the game:
+          ![image](https://user-images.githubusercontent.com/73673683/147259632-131cdcc7-5e6a-451e-ac30-2500adc68947.png)
+
+
+- [ ] \(12/23/2021) User’s score history will include pagination
+  * Show latest 10
+  * Paginate after 10
+  * Show appropriate message for no results
+    - Status: Almost Completely Working
+      - Not paginated because didn't get a chance to work further on it due to shortage of time.
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/profile.php
+      - https://ks874-prod.herokuapp.com/lib/functions.php
+    - Pull Requests
+      - https://github.com/i-am-kalrav/IT202-003/pull/99
+    - Screenshots
+      - Latest 10 scores:
+          ![image](https://user-images.githubusercontent.com/73673683/147261400-6ed258b5-b803-4393-a5ab-8b74b644b44b.png)
+
+      - Function:
+          ![image](https://user-images.githubusercontent.com/73673683/147261659-56e19bc0-3d0d-4d89-8256-b9ba49c22ea9.png)
+
+      - Error/problem Message:
+          ![image](https://user-images.githubusercontent.com/73673683/147261740-50b03dfa-a0a7-4028-bb0d-138cda9c4f67.png)
+
+
+- [x] \(12/23/2021) Home page will have a weekly, monthly, and lifetime scoreboard
+  * Will also have a link to the game
+  * Scoreboards will show username and points for the session
+      * (See requirement about username linking to profile)
+    - Status: Completed
+    - Direct Link:
+      - https://ks874-prod.herokuapp.com/Project/home.php
+      - https://ks874-prod.herokuapp.com/partials/highscore_table.php
+      - https://ks874-prod.herokuapp.com/lib/functions.php
+    - Pull Requests
+      - https://github.com/i-am-kalrav/IT202-003/pull/101
+      - https://github.com/i-am-kalrav/IT202-003/pull/102
+    - Screenshots
+      - Function to get top 10 scores for a duration:
+          ![image](https://user-images.githubusercontent.com/73673683/147264790-ccebf72a-7be2-4417-8ac6-a5c638687545.png)
+      - ScoreBoards have links to the game as well:
+          ![image](https://user-images.githubusercontent.com/73673683/147265914-d36b4eab-04a6-4827-9be9-5adc7dd63c87.png)
+
+      - Which takes us to the game page:
+          ![image](https://user-images.githubusercontent.com/73673683/147266017-0dab741b-121c-4318-b775-be32e4756a7f.png)
+
 
 
 ### Intructions
